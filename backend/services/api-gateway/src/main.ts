@@ -1,12 +1,10 @@
-import { config } from "./bootstrap/config.ts";
-import { routeRequest } from "./features/proxy/proxy.router.ts";
+import { createApp } from "@/bootstrap/app.js";
+import { env } from "@/bootstrap/config.js";
+import { installGracefulShutdown } from "@/bootstrap/graceful-shutdown.js";
 
 if (import.meta.main) {
-  Bun.serve({
-    hostname: "0.0.0.0",
-    port: config.port,
-    fetch: routeRequest,
+  const server = createApp().listen(env.PORT, "0.0.0.0", () => {
+    console.info(`api-gateway listening on port ${env.PORT}`);
   });
-
-  console.info(`api-gateway listening on port ${config.port}`);
+  installGracefulShutdown(server, { timeoutMs: env.SHUTDOWN_TIMEOUT_MS });
 }

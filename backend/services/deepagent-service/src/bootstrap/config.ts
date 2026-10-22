@@ -1,9 +1,23 @@
-function readPort(value: string | undefined): number {
-  const port = Number(value ?? 3000);
-  if (!Number.isInteger(port) || port < 1 || port > 65535) {
-    throw new Error(`PORT must be an integer from 1 to 65535; received: ${value}`);
+import { z } from "zod";
+
+const environmentSchema = z.object({
+  PORT: z.coerce.number().int().min(1).max(65535).default(3000),
+  SHUTDOWN_TIMEOUT_MS: z.coerce.number().int().min(100).max(120_000).default(10_000),
+  MODEL_PROVIDER: z.string().optional(),
+  MODEL_API_KEY: z.string().optional(),
+});
+
+export function parseConfig(environment: Record<string, string | undefined>) {
+  const result = environmentSchema.safeParse(environment);
+  if (!result.success) {
+    const issues = result.error.issues
+      .map((issue) => `${issue.path.join(".") || "environment"}: ${issue.message}`)
+      .join("\n");
+    throw new Error(`Invalid DeepAgent Service environment:\n${issues}`);
   }
-  return port;
+
+  return result.data;
 }
 
-export const config = { port: readPort(Bun.env.PORT) };
+export const env = parseConfig(process.env);
+export type EnvType = typeof env;
