@@ -14,7 +14,7 @@ export function createApp({ apiRouter = proxyRouter, logStream = process.stdout 
 
   app.get("/health", (_request:Request, response:Response) => {
     const body: HealthResponse = { service: "api-gateway", status: "ok", runtime: "bun" };
-    response.json(body);
+    response.status(200).json(body);
   });
   app.use("/api/v1", apiRouter);
 
