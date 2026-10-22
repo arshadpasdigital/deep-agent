@@ -1,0 +1,32 @@
+services:
+
+  auth-service:
+    image: deep-agent-auth-service:local
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      PORT: "3000"
+      MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME:-deepagent}:${MONGO_INITDB_ROOT_PASSWORD:-local-development-only}@mongodb:27017/deep_agent?authSource=admin
+    env_file:
+      - path: .env
+        required: false
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - bun
+        - -e
+        - "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
+
