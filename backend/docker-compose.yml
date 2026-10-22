@@ -1,107 +1,10 @@
+include:
+  - ./services/api-gateway/docker-compose.yml
+  - ./services/auth-service/docker-compose.yml
+  - ./services/deepagent-service/docker-compose.yml
+  - ./services/notification-service/docker-compose.yml
+
 services:
-  api-gateway:
-    image: deep-agent-api-gateway:local
-    build:
-      context: .
-      dockerfile: services/api-gateway/Dockerfile
-    ports:
-      - "${API_GATEWAY_PORT:-8080}:3000"
-    environment:
-      PORT: "3000"
-      AUTH_SERVICE_URL: http://auth-service:3000
-      NOTIFICATION_SERVICE_URL: http://notification-service:3000
-      DEEPAGENT_SERVICE_URL: http://deepagent-service:3000
-    env_file:
-      - path: ./services/api-gateway/.env
-        required: false
-    depends_on:
-      auth-service:
-        condition: service_healthy
-      notification-service:
-        condition: service_healthy
-      deepagent-service:
-        condition: service_healthy
-    healthcheck:
-      test:
-        - CMD
-        - bun
-        - -e
-        - "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
-      interval: 10s
-      timeout: 3s
-      retries: 5
-    networks:
-      - backend-network
-
-  auth-service:
-    image: deep-agent-auth-service:local
-    build:
-      context: .
-      dockerfile: services/auth-service/Dockerfile
-    environment:
-      PORT: "3000"
-      MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME:-deepagent}:${MONGO_INITDB_ROOT_PASSWORD:-local-development-only}@mongodb:27017/deep_agent?authSource=admin
-    env_file:
-      - path: ./services/auth-service/.env
-        required: false
-    depends_on:
-      mongodb:
-        condition: service_healthy
-    healthcheck:
-      test:
-        - CMD
-        - bun
-        - -e
-        - "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
-      interval: 10s
-      timeout: 3s
-      retries: 5
-    networks:
-      - backend-network
-
-  notification-service:
-    image: deep-agent-notification-service:local
-    build:
-      context: .
-      dockerfile: services/notification-service/Dockerfile
-    environment:
-      PORT: "3000"
-    env_file:
-      - path: ./services/notification-service/.env
-        required: false
-    healthcheck:
-      test:
-        - CMD
-        - bun
-        - -e
-        - "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
-      interval: 10s
-      timeout: 3s
-      retries: 5
-    networks:
-      - backend-network
-
-  deepagent-service:
-    image: deep-agent-deepagent-service:local
-    build:
-      context: .
-      dockerfile: services/deepagent-service/Dockerfile
-    environment:
-      PORT: "3000"
-    env_file:
-      - path: ./services/deepagent-service/.env
-        required: false
-    healthcheck:
-      test:
-        - CMD
-        - bun
-        - -e
-        - "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
-      interval: 10s
-      timeout: 3s
-      retries: 5
-    networks:
-      - backend-network
 
   mongodb:
     image: mongo:8
@@ -123,9 +26,78 @@ services:
     networks:
       - backend-network
 
+  mongo-express:
+    image: mongo-express:1.0.2
+    ports:
+      - "${MONGO_EXPRESS_PORT:-8081}:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME:-deepagent}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-local-development-only}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME:-deepagent}:${MONGO_INITDB_ROOT_PASSWORD:-local-development-only}@mongodb:27017/?authSource=admin
+      ME_CONFIG_BASICAUTH: "false"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - backend-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend-network
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-deepagent}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-local-development-only}
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend-network
+
+  postgres-vector:
+    image: pgvector/pgvector:pg17
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-deep_agent}
+      POSTGRES_USER: ${POSTGRES_USER:-deepagent}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend-network
+
 networks:
   backend-network:
     driver: bridge
 
 volumes:
   mongodb-data:
+  redis-data:
+  rabbitmq-data:
+  postgres-data:
