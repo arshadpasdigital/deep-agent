@@ -1,17 +1,17 @@
 import * as grpc from '@grpc/grpc-js'
-import { env } from './config.js';
+import { env } from '../config.js';
 
 export const startTaskServers = ()=>{
     const server = new grpc.Server();
     
 
-    server.bindAsync(`0.0.0.0:${env.PORT}`,grpc.ServerCredentials.createInsecure(),
+    server.bindAsync(`0.0.0.0:${env.GRPC_DEEP_AGENT_PORT}`,grpc.ServerCredentials.createInsecure(),
     (error,port)=>{
         if(error){
             console.error(`Server failed to bind: ${error.message}`);
             return;
         }
-        console.log(`Task Service running on port : ${port}`)
+        console.log(`deep agent Service running on port : ${port}`)
     }
     )
 }

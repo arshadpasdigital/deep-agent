@@ -10,10 +10,14 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.14.6",
     "@grpc/proto-loader": "^0.8.1",
+    "amqplib": "^2.2.0",
+    "better-auth": "^1.7.12",
+    "cockatiel": "^4.0.0",
     "dotenv": "^18.0.8",
     "express": "^5.3.0",
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
+    "mongoose": "8",
     "morgan": "^1.12.1",
     "zod": "^4.6.7"
   },

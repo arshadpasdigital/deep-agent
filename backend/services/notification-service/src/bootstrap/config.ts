@@ -1,11 +1,20 @@
 import { z } from "zod";
 
 const environmentSchema = z.object({
-  PORT: z.coerce.number().int().min(1).max(65535).default(3000),
+  NODE_ENV:z.enum(["development","testing",'production']),
+  PORT: z.coerce.number().int(),
+GRPC_NOTIFICATION_PORT:z.coerce.number().int(),
   SHUTDOWN_TIMEOUT_MS: z.coerce.number().int().min(100).max(120_000).default(10_000),
-  EMAIL_PROVIDER_API_KEY: z.string().optional(),
-  EMAIL_FROM: z.string().optional(),
+  EMAIL_HOST: z.string().trim().min(1).optional(),
+  EMAIL_PORT: z.coerce.number().int().min(1).max(65535).default(587),
+  EMAIL_SECURE: z.enum(["true", "false"]).default("false").transform((value) => value === "true"),
+  EMAIL_USER: z.string().trim().optional(),
+  EMAIL_PASSWORD: z.string().optional(),
+  EMAIL_FROM: z.string().trim().min(1).optional(),
+  RABBITMQ_URL: z.string().default("amqp://deepagent:local-development-only@localhost:5672"),
 });
+
+
 
 export function parseConfig(environment: Record<string, string | undefined>) {
   const result = environmentSchema.safeParse(environment);
