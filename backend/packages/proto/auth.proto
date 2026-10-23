@@ -1,1 +1,15 @@
 syntax = "proto3";
+
+package auth;
+
+service Auth{
+    rpc getUser(GetUserRequest) returns GetUserResponse;
+}
+
+message GetUserRequest{
+    string token=1;
+}
+
+message GetUserResponse {
+  string token = 1;
+}

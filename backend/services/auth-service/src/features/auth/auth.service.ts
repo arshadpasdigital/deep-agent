@@ -1,1 +1,9 @@
-// TODO: Implement registration, login, and token issuance without transport concerns.
+import { AuthRepo } from "./auth.repository.js";
+
+export class AuthService{
+    constructor(
+        private readonly authRep:AuthRepo
+    ){
+
+    }
+}
