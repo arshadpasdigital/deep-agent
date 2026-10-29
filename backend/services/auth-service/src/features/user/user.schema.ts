@@ -1,22 +1,24 @@
 import mongoose, { type HydratedDocument } from "mongoose";
 
 export interface User {
+  _id: string;
   name: string;
   email: string;
-  image: string;
-  access_token: string;
-  refresh_token: string;
+  emailVerified: boolean;
+  image?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const userSchema = new mongoose.Schema<User>(
   {
+    _id: { type: String, required: true },
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    image: { type: String, required: true, trim: true },
-    access_token: { type: String, required: true, select: false },
-    refresh_token: { type: String, required: true, select: false },
+    emailVerified: { type: Boolean, required: true, default: false },
+    image: { type: String, default: null },
   },
-  { timestamps: true },
+  { timestamps: true, collection: "user", versionKey: false },
 );
 
 export type UserDocument = HydratedDocument<User>;
