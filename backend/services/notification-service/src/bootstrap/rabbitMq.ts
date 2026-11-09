@@ -1,6 +1,6 @@
 import amqplib, { type Channel, type ChannelModel, type Options } from "amqplib";
 import { ExponentialBackoff, handleAll, retry } from "cockatiel";
-import { env } from "./config.js";
+import { getEnv } from "./config.js";
 
 const EXCHANGE_NAME = "auth.events";
 const QUEUE_NAME = "auth.events.queue";
@@ -32,7 +32,7 @@ class RabbitMQ {
     }
 
     this.connectionPromise ??= connectionPolicy.execute(async () => {
-      const connection = await amqplib.connect(env.RABBITMQ_URL);
+      const connection = await amqplib.connect(getEnv().RABBITMQ_URL);
       try {
         const channel = await connection.createChannel();
         await channel.assertExchange(EXCHANGE_NAME, "topic", { durable: true });

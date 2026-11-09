@@ -1,9 +1,9 @@
-import { env } from "@/bootstrap/config.js";
+import { getEnv } from "@/bootstrap/config.js";
 
 const upstreams = [
-  { prefix: "/api/auth", baseUrl: env.AUTH_SERVICE_URL },
-  { prefix: "/api/notifications", baseUrl: env.NOTIFICATION_SERVICE_URL },
-  { prefix: "/api/agent", baseUrl: env.DEEPAGENT_SERVICE_URL },
+  { prefix: "/api/auth", baseUrl: getEnv().AUTH_SERVICE_URL },
+  { prefix: "/api/notifications", baseUrl: getEnv().NOTIFICATION_SERVICE_URL },
+  { prefix: "/api/agent", baseUrl: getEnv().DEEPAGENT_SERVICE_URL },
 ] as const;
 
 export async function forwardRequest(request: Request): Promise<Response> {

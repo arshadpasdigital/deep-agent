@@ -7,6 +7,17 @@ The backend is organized as four separately built Bun services:
 - `notification-service`: reserved for email delivery.
 - `deepagent-service`: reserved for agent and model-provider logic.
 
+## Auth paths
+
+- Better Auth owns `/api/auth/*`. The gateway proxies that prefix directly to the
+  auth service, forwarding request bodies, cookies, and upstream response headers.
+- `/api/v1/auth` is reserved for application auth routes and is not an alias for
+  Better Auth. Do not move the Better Auth handler under the versioned prefix:
+  `BETTER_AUTH_URL` and session cookie paths are built from the gateway origin.
+- The notification service exposes its internal email endpoint at
+  `/internal/emails`; the gateway never proxies that prefix. Auth and notification
+  services authenticate the call with `INTERNAL_SERVICE_TOKEN`.
+
 Each service has its own `package.json`, source tree, and Dockerfile. The manifests currently contain no third-party dependencies. The Dockerfiles run Bun directly and do not install packages.
 
 `docker-compose.yml` is the only Compose file. It builds all four services and starts MongoDB. Only the API Gateway publishes a host port; other containers are reached by their Compose service names. `packages/contracts` is source-only shared TypeScript and is copied into each application image at build time. It is not installed as a package.

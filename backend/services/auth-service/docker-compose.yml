@@ -9,6 +9,11 @@ services:
       PORT: "3000"
       MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME:-deepagent}:${MONGO_INITDB_ROOT_PASSWORD:-local-development-only}@mongodb:27017/deep_agent?authSource=admin
       RABBITMQ_URL: amqp://${RABBITMQ_DEFAULT_USER:-deepagent}:${RABBITMQ_DEFAULT_PASS:-local-development-only}@rabbitmq:5672
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:8080}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-local-development-only-secret}
+      TRUSTED_ORIGINS: ${TRUSTED_ORIGINS:-http://localhost:5173}
+      NOTIFICATION_SERVICE_URL: http://notification-service:3000
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-local-development-only}
     env_file:
       - path: .env
         required: false

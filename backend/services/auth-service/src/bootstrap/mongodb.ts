@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { env } from "./config.js";
+import { getEnv } from "./config.js";
 
 export class MongodbClient {
   private static instance: MongodbClient | undefined;
@@ -21,7 +21,7 @@ export class MongodbClient {
       return mongoose;
     }
 
-    await mongoose.connect(env.MONGODB_URI);
+    await mongoose.connect(getEnv().MONGODB_URI);
     return mongoose;
   }
 

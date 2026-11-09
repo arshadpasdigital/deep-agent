@@ -1,24 +1,35 @@
 import { describe, expect, test } from "bun:test";
 import { parseConfig } from "./config.ts";
 
+const base = {
+  NODE_ENV: "testing",
+  ORIGIN: "http://localhost:5173",
+  GRPC_AUTH_PORT: "50051",
+};
+
 describe("API Gateway environment", () => {
   test("uses the documented local defaults", () => {
-    expect(parseConfig({})).toMatchObject({
-      port: 3000,
-      shutdownTimeoutMs: 10_000,
-      authServiceUrl: "http://auth-service:3000",
+    expect(parseConfig(base)).toMatchObject({
+      PORT: 3000,
+      SHUTDOWN_TIMEOUT_MS: 10_000,
+      AUTH_SERVICE_URL: "http://auth-service:3000",
     });
   });
 
   test("accepts valid service URLs and port overrides", () => {
-    expect(parseConfig({ PORT: "8081", AUTH_SERVICE_URL: "http://auth:3001/" })).toMatchObject({
-      port: 8081,
-      authServiceUrl: "http://auth:3001",
+    expect(
+      parseConfig({ ...base, PORT: "8081", AUTH_SERVICE_URL: "http://auth:3001" }),
+    ).toMatchObject({
+      PORT: 8081,
+      AUTH_SERVICE_URL: "http://auth:3001",
     });
   });
 
-  test("reports invalid variables by name", () => {
-    expect(() => parseConfig({ PORT: "0", AUTH_SERVICE_URL: "not-a-url" })).toThrow("PORT");
-    expect(() => parseConfig({ AUTH_SERVICE_URL: "not-a-url" })).toThrow("AUTH_SERVICE_URL");
+  test("reports missing and invalid variables by name", () => {
+    expect(() => parseConfig({})).toThrow("ORIGIN");
+    expect(() => parseConfig({ ...base, PORT: "0" })).toThrow("PORT");
+    expect(() => parseConfig({ ...base, AUTH_SERVICE_URL: "not-a-url" })).toThrow(
+      "AUTH_SERVICE_URL",
+    );
   });
 });

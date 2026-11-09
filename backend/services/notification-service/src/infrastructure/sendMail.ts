@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import type { SendMailOptions, SentMessageInfo, Transporter } from "nodemailer";
-import { env } from "../bootstrap/config.js";
+import { getEnv } from "../bootstrap/config.js";
 
 export type MailMessage = Pick<SendMailOptions, "to" | "subject" | "text" | "html" | "cc" | "bcc" | "replyTo" | "attachments">;
 
@@ -11,6 +11,7 @@ function getTransporter(): Transporter {
     return transporter;
   }
 
+  const env = getEnv();
   if (!env.EMAIL_HOST || !env.EMAIL_FROM) {
     throw new Error("Email is not configured. Set EMAIL_HOST and EMAIL_FROM before sending mail.");
   }
@@ -34,7 +35,7 @@ function getTransporter(): Transporter {
 export async function sendMail(message: MailMessage): Promise<SentMessageInfo> {
   return getTransporter().sendMail({
     ...message,
-    from: env.EMAIL_FROM,
+    from: getEnv().EMAIL_FROM,
   });
 }
 

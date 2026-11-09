@@ -2,12 +2,14 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Inter Variable', sans-serif;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -130,4 +132,51 @@
   html {
     @apply font-sans;
     }
+}
+
+.auth-panel {
+  --auth-surface: oklch(0.985 0 0);
+  --auth-surface-raised: oklch(1 0 0);
+  --auth-ink: oklch(0.17 0 0);
+  --auth-muted: oklch(0.5 0 0);
+  --auth-line: oklch(0.17 0 0 / 9%);
+  --auth-line-strong: oklch(0.17 0 0 / 22%);
+  --auth-accent: oklch(0.71 0.14 72);
+  --auth-accent-ink: oklch(0.19 0.04 72);
+  background-color: var(--auth-surface);
+  color: var(--auth-ink);
+  background-image:
+    radial-gradient(ellipse 80% 70% at 50% 45%, var(--auth-surface) 0%, transparent 78%),
+    linear-gradient(to right, var(--auth-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--auth-line) 1px, transparent 1px);
+  background-size: auto, 2rem 2rem, 2rem 2rem;
+  background-position: center;
+}
+
+.dark .auth-panel {
+  --auth-surface: oklch(0.16 0 0);
+  --auth-surface-raised: oklch(0.195 0 0);
+  --auth-ink: oklch(0.965 0 0);
+  --auth-muted: oklch(0.68 0 0);
+  --auth-line: oklch(1 0 0 / 10%);
+  --auth-line-strong: oklch(1 0 0 / 22%);
+  --auth-accent: oklch(0.77 0.14 74);
+  --auth-accent-ink: oklch(0.18 0.04 74);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .auth-step {
+    animation: auth-step-in 180ms cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+@keyframes auth-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

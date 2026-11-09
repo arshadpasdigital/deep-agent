@@ -9,7 +9,11 @@ describe("API Gateway Express app", () => {
     const logStream = { write: (line: string) => logs.push(line) };
     const apiRouter = express.Router();
     apiRouter.post("/__test", (request, response) => response.json({ body: request.body }));
-    const server = createApp({ apiRouter, logStream }).listen(0, "127.0.0.1");
+    const server = createApp({
+      apiRouter,
+      logStream,
+      config: { ORIGIN: "http://localhost:5173", AUTH_SERVICE_URL: "http://auth-service:3000" },
+    }).listen(0, "127.0.0.1");
     await once(server, "listening");
     const address = server.address();
     if (!address || typeof address === "string") throw new Error("Test server did not bind a TCP port");

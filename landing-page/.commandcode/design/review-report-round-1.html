@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deep Agent Landing Page — UI/UX Review, Round 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .report-section { border: 1px solid #222226; background: #0a0a0b; position: relative; }
+    .corner-box { position: absolute; width: 20px; height: 20px; border: 1px solid #222226; background: #000; }
+  </style>
+</head>
+<body class="bg-black text-[#fafafa]">
+  <main class="mx-auto w-full max-w-6xl px-5 py-8 md:px-10 md:py-12">
+    <header class="report-section mb-8 p-6 md:p-8">
+      <div class="corner-box left-0 top-0 -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="corner-box right-0 top-0 translate-x-1/2 -translate-y-1/2"></div>
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <div class="mono mb-2 text-xs tracking-widest text-[#666]">// UI/UX REVIEW — ROUND 1</div>
+          <h1 class="text-4xl font-bold tracking-tight md:text-6xl">Deep Agent Landing Page</h1>
+        </div>
+        <div class="mono text-left text-xs text-[#666] md:text-right">
+          <div>COMMANDCODE REPORT</div>
+          <div class="text-[#444]">2026-11-09</div>
+          <div class="mt-2 text-[#444]">SINGLE PAGE / DESKTOP + MOBILE</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="corner-box left-0 top-0 -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="corner-box right-0 top-0 translate-x-1/2 -translate-y-1/2"></div>
+      <div class="grid gap-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+        <div>
+          <div class="mono mb-2 text-xs tracking-widest text-[#666]">// OVERALL</div>
+          <div class="text-6xl font-bold tracking-tight md:text-7xl">41</div>
+          <div class="mt-1 text-lg text-[#666]">/ 50</div>
+          <div class="mt-4 inline-flex border border-[#fbbf24]/30 bg-[#fbbf24]/10 px-3 py-1 text-sm text-[#fbbf24]">NEEDS CHANGES</div>
+        </div>
+        <div>
+          <div class="mono mb-3 text-xs tracking-widest text-[#666]">// TL;DR</div>
+          <p class="text-sm leading-6 text-[#a0a0a0]">The first impression is strong and specific. The memory inspector is a real proof object, the warm paper + vermilion + moss palette avoids the default AI gradient, and the serif/mono pairing carries a clear editorial-technical voice. What holds it back is repetition: six sections reuse the same "statement plus italic orange tail" headline formula, the page becomes text-led after the hero, and the interaction layer has gaps.</p>
+          <p class="mt-4 text-sm leading-6 text-[#fbbf24]">Primary move: a full redesign that changes the spatial premise. Keep the domain proof, rebuild the composition around a registry / instrument panel, and fix the hit areas, tab panels, and CTA loop.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="mono mb-6 text-xs tracking-widest text-[#666]">// HEURISTIC SCORES</div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[720px] border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-[#222226] text-left mono text-xs text-[#666]">
+              <th class="py-3 pr-4 font-normal">#</th>
+              <th class="py-3 pr-4 font-normal">LENS</th>
+              <th class="py-3 pr-4 font-normal">SCORE</th>
+              <th class="py-3 font-normal">KEY FINDING</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[#1a1a1e]">
+              <td class="py-4 pr-4 text-[#555]">1</td>
+              <td class="py-4 pr-4 text-[#fafafa]">First impression</td>
+              <td class="py-4 pr-4 text-[#34d399]">9 / 10</td>
+              <td class="py-4 text-[#a0a0a0]">Memory inspector + ledger palette are memorable and product-specific</td>
+            </tr>
+            <tr class="border-b border-[#1a1a1e]">
+              <td class="py-4 pr-4 text-[#555]">2</td>
+              <td class="py-4 pr-4 text-[#fafafa]">Hierarchy</td>
+              <td class="py-4 pr-4 text-[#34d399]">8 / 10</td>
+              <td class="py-4 text-[#a0a0a0]">Clear at a glance; repeated heading pattern flattens section distinction</td>
+            </tr>
+            <tr class="border-b border-[#1a1a1e]">
+              <td class="py-4 pr-4 text-[#555]">3</td>
+              <td class="py-4 pr-4 text-[#fafafa]">Color voice</td>
+              <td class="py-4 pr-4 text-[#34d399]">9 / 10</td>
+              <td class="py-4 text-[#a0a0a0]">Warm paper, vermilion, moss; authored dark mode; no generic tech gradient</td>
+            </tr>
+            <tr class="border-b border-[#1a1a1e]">
+              <td class="py-4 pr-4 text-[#555]">4</td>
+              <td class="py-4 pr-4 text-[#fafafa]">Type voice</td>
+              <td class="py-4 pr-4 text-[#34d399]">8 / 10</td>
+              <td class="py-4 text-[#a0a0a0]">Instrument Serif + Inter + Plex Mono works; the italic-accent formula repeats</td>
+            </tr>
+            <tr>
+              <td class="py-4 pr-4 text-[#555]">5</td>
+              <td class="py-4 pr-4 text-[#fafafa]">Interaction feel</td>
+              <td class="py-4 pr-4 text-[#fbbf24]">7 / 10</td>
+              <td class="py-4 text-[#a0a0a0]">Restart, facts, copy, cross-tenant check are meaningful; hit areas and CTA loop lag</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="mono mb-6 text-xs tracking-widest text-[#666]">// SIGNALS</div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <div class="mb-3 text-xl font-semibold">Direction is working</div>
+          <ul class="space-y-3 text-sm text-[#a0a0a0]">
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Memory inspector shows thread, checkpoint, facts, restart</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Palette is not the default AI indigo or blue-violet gradient</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Body contrast 10.54:1; labels 5.19–5.98:1</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>320 px and 390 px reflow without horizontal overflow</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Reduced motion resolves to no animation</li>
+            <li><span class="mono mr-2 text-[#fbbf24]">WATCH</span>Six headlines share one compositional formula</li>
+            <li><span class="mono mr-2 text-[#ef4444]">FAIL</span>Tabs 29 px and restart 36 px tall; below 44 px</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono mb-3 text-xs tracking-widest text-[#666]">// NEXT MODES</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/design redesign</span>
+            <span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/design a11y</span>
+            <span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/design interaction</span>
+            <span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/design typeset</span>
+          </div>
+          <div class="mt-6 border border-[#222226] p-4">
+            <div class="mono mb-2 text-xs tracking-widest text-[#666]">// VERDICT</div>
+            <p class="text-sm leading-6 text-[#a0a0a0]">No page-breaking HIGH remains after the overflow fix, but the 44 px hit-area failure is still standing and six medium findings remain. The direction is worth keeping as a reference; the repetition and text-heavy lower page justify a redesign rather than polish.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="mono mb-6 text-xs tracking-widest text-[#666]">// WHAT'S WORKING</div>
+      <div class="grid gap-4 md:grid-cols-3">
+        <article class="border border-[#1f1f24] p-4">
+          <h2 class="mb-2 text-sm font-semibold">A real proof object</h2>
+          <p class="text-sm leading-6 text-[#a0a0a0]">The inspector shows a thread, a checkpoint, a recalled fact, and a restart. It is the strongest element and belongs only to this product.</p>
+        </article>
+        <article class="border border-[#1f1f24] p-4">
+          <h2 class="mb-2 text-sm font-semibold">A non-default palette</h2>
+          <p class="text-sm leading-6 text-[#a0a0a0]">Warm off-white, ink, vermilion, moss. It reads as a ledger, not a SaaS template. Dark mode is authored, not inverted.</p>
+        </article>
+        <article class="border border-[#1f1f24] p-4">
+          <h2 class="mb-2 text-sm font-semibold">Technical credibility</h2>
+          <p class="text-sm leading-6 text-[#a0a0a0]">Spec sheet, code sample, namespace tree, and isolation check answer an engineer's real questions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="mono mb-6 text-xs tracking-widest text-[#666]">// PRIORITY ISSUES</div>
+      <div class="space-y-5">
+        <article class="border border-[#2a1d22] bg-[#110b0d] p-5">
+          <div class="mono mb-2 text-xs text-[#f43f5e]">HIGH / ACCESSIBILITY</div>
+          <h2 class="mb-2 text-lg font-semibold">Touch targets are below 44 px</h2>
+          <p class="mb-4 text-sm leading-6 text-[#a0a0a0]"><span class="mono text-[#888]">tabs.tsx:78</span> renders 29 px tab buttons. <span class="mono text-[#888]">memory-console.tsx:111</span> renders a 36 px restart button. On a phone these are adjacent targets.</p>
+          <div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: 44 px minimum hit area on coarse pointers, even if the visual glyph stays compact.</div>
+        </article>
+
+        <article class="border border-[#2a2418] bg-[#0f0d08] p-5">
+          <div class="mono mb-2 text-xs text-[#fbbf24]">MEDIUM / ACCESSIBILITY</div>
+          <h2 class="mb-2 text-lg font-semibold">Inactive tabs point to missing panels</h2>
+          <p class="mb-4 text-sm leading-6 text-[#a0a0a0]">Only the active tabpanel exists in the DOM, so the inactive tab's <span class="mono text-[#888]">aria-controls</span> points at nothing. The same pattern appears in memory and code tabs.</p>
+          <div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: render all panels, hide inactive ones with <span class="mono">hidden</span>, or remove the tab role.</div>
+        </article>
+
+        <article class="border border-[#2a2418] bg-[#0f0d08] p-5">
+          <div class="mono mb-2 text-xs text-[#fbbf24]">MEDIUM / INTERACTION</div>
+          <h2 class="mb-2 text-lg font-semibold">The primary CTA is a loop</h2>
+          <p class="mb-4 text-sm leading-relaxed text-[#a0a0a0]">"Start building" lands on a final CTA whose two buttons point back up the page. There is no concrete start action at the end of the journey.</p>
+          <div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: lead the final CTA with a copyable run command, then the implementation link.</div>
+        </article>
+
+        <article class="border border-[#2a2418] bg-[#0f0d08] p-5">
+          <div class="mono mb-2 text-xs text-[#fbbf24]">MEDIUM / LAYOUT</div>
+          <h2 class="mb-2 text-lg font-semibold">The console grows when it demonstrates a restart</h2>
+          <p class="mb-4 text-sm leading-6 text-[#a0a0a0]">The restored status wraps to three lines and adds ~55 px to the panel, moving the proof strip and everything below it.</p>
+          <div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: shorten the status copy and reserve the panel height.</div>
+        </article>
+
+        <article class="border border-[#2a2418] bg-[#0f0d08] p-5">
+          <div class="mono mb-2 text-xs text-[#fbbf24]">MEDIUM / VOICE</div>
+          <h2 class="mb-2 text-lg font-semibold">The headline formula repeats six times</h2>
+          <p class="mb-4 text-sm leading-6 text-[#a0a0a0]">"The context window closes. The work doesn't." / "Two memories. One agent." / "A spec sheet, not a slogan." Each ends with an italic orange phrase. The device works once and then becomes a template.</p>
+          <div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: redesign the section compositions and reserve the italic accent for one moment.</div>
+        </article>
+
+        <article class="border border-[#2a2418] bg-[#0f0d08] p-5">
+          <div class="mono mb-2 text-xs text-[#fbbf24]">MEDIUM / CONTENT</div>
+          <h2 class="mb-2 text-lg font-semibold">The tools snippet does not match the real API</h2>
+          <p class="mb-4 text-sm leading-6 text-[#a0a0a0]">The page shows <span class="mono text-[#888]">memory.remember({ userId, agentId, key, text })</span>, but the service signature is <span class="mono text-[#888]">remember(identity, key, fact)</span>. Engineers will notice.</p>
+          <div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: show the scoped identity, key, and fact input exactly as implemented.</div>
+        </article>
+      </div>
+
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[760px] border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-[#222226] text-left mono text-xs text-[#666]">
+              <th class="py-3 pr-4 font-normal">#</th>
+              <th class="py-3 pr-4 font-normal">SEV</th>
+              <th class="py-3 pr-4 font-normal">DISCIPLINE</th>
+              <th class="py-3 pr-4 font-normal">LOCATION</th>
+              <th class="py-3 font-normal">AFTER</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 text-[#555]">7</td><td class="py-3 pr-4 text-[#888]">LOW</td><td class="py-3 pr-4 text-[#a0a0a0]">Layout</td><td class="py-3 pr-4 mono text-xs text-[#777]">App.tsx:365</td><td class="py-3 text-[#a0a0a0]">Align mechanism tags on a shared baseline</td></tr>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 text-[#555]">8</td><td class="py-3 pr-4 text-[#888]">LOW</td><td class="py-3 pr-4 text-[#a0a0a0]">Responsive</td><td class="py-3 pr-4 mono text-xs text-[#777]">App.tsx:185, 230</td><td class="py-3 text-[#a0a0a0]">Break mono lines at separators, not mid-phrase</td></tr>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 text-[#555]">9</td><td class="py-3 pr-4 text-[#888]">LOW</td><td class="py-3 pr-4 text-[#a0a0a0]">Typography</td><td class="py-3 pr-4 mono text-xs text-[#777]">App.tsx:454</td><td class="py-3 text-[#a0a0a0]">Keep "the agent" together in the heading</td></tr>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 text-[#555]">10</td><td class="py-3 pr-4 text-[#888]">LOW</td><td class="py-3 pr-4 text-[#a0a0a0]">Layout</td><td class="py-3 pr-4 mono text-xs text-[#777]">App.tsx:429</td><td class="py-3 text-[#a0a0a0]">Align spec rows with their top rule</td></tr>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 text-[#555]">11</td><td class="py-3 pr-4 text-[#888]">LOW</td><td class="py-3 pr-4 text-[#a0a0a0]">Accessibility</td><td class="py-3 pr-4 mono text-xs text-[#777]">site-header.tsx:55</td><td class="py-3 text-[#a0a0a0]">Close the mobile disclosure on Escape</td></tr>
+            <tr><td class="py-3 pr-4 text-[#555]">12</td><td class="py-3 pr-4 text-[#888]">LOW</td><td class="py-3 pr-4 text-[#a0a0a0]">Content</td><td class="py-3 pr-4 mono text-xs text-[#777]">App.tsx:365, 429</td><td class="py-3 text-[#a0a0a0]">Differentiate duplicate h3 labels</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="mono mb-6 text-xs tracking-widest text-[#666]">// CONSIDERED BUT REJECTED</div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-[#222226] text-left mono text-xs text-[#666]">
+              <th class="py-3 pr-4 font-normal">LOCATION</th>
+              <th class="py-3 pr-4 font-normal">CANDIDATE</th>
+              <th class="py-3 font-normal">REJECTED BECAUSE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 mono text-xs text-[#777]">Hero</td><td class="py-3 pr-4 text-[#a0a0a0]">Enlarge the headline further</td><td class="py-3 text-[#a0a0a0]">102 px already owns the hierarchy; section variety is the problem</td></tr>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 mono text-xs text-[#777]">Palette</td><td class="py-3 pr-4 text-[#a0a0a0]">Replace vermilion</td><td class="py-3 text-[#a0a0a0]">Contrast and voice pass; repetition is the issue, not hue</td></tr>
+            <tr class="border-b border-[#1a1a1e]"><td class="py-3 pr-4 mono text-xs text-[#777]">Hero</td><td class="py-3 pr-4 text-[#a0a0a0]">Add a gradient behind the inspector</td><td class="py-3 text-[#a0a0a0]">The flat field is doing the work; a gradient is decoration</td></tr>
+            <tr><td class="py-3 pr-4 mono text-xs text-[#777]">Sections</td><td class="py-3 pr-4 text-[#a0a0a0]">Restore scroll-triggered reveals</td><td class="py-3 text-[#a0a0a0]">The first build hid content in static rendering; mount entrance is safer</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="report-section mb-8 p-6 md:p-8">
+      <div class="mono mb-6 text-xs tracking-widest text-[#666]">// VERIFICATION</div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <div class="mono mb-3 text-xs tracking-widest text-[#666]">CHECKS RUN</div>
+          <ul class="space-y-2 text-sm text-[#a0a0a0]">
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>1440 / 390 / 320 screenshots and full-page captures</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Restart, facts tab, arrow-key tabs, mobile menu</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Cross-tenant read returns 403 and 0 facts</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>Contrast measured on 12 text pairs</li>
+            <li><span class="mono mr-2 text-[#34d399]">PASS</span>typecheck / lint / build</li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono mb-3 text-xs tracking-widest text-[#666]">NOT VERIFIED</div>
+          <ul class="space-y-2 text-sm text-[#a0a0a0]">
+            <li><span class="mono mr-2 text-[#888]">GAP</span>Real screen-reader pass (VoiceOver / NVDA)</li>
+            <li><span class="mono mr-2 text-[#888]">GAP</span>200% zoom and text-only zoom</li>
+            <li><span class="mono mr-2 text-[#888]">GAP</span>Safari and Firefox rendering</li>
+          </ul>
+          <div class="mt-5 border border-[#1f1f24] p-3 text-sm leading-6 text-[#a0a0a0]">
+            <span class="mono text-[#34d399]">FIXED DURING AUDIT:</span> scroll-gated content was invisible in static capture; the 34 rem code block forced a 598 px document at 390 px.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mono py-8 text-center text-xs tracking-widest text-[#444]">
+      GENERATED WITH COMMANDCODE — 2026-11-09 — ROUND 1 OF 2
+    </footer>
+  </main>
+</body>
+</html>

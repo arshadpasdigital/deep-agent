@@ -19,7 +19,10 @@ describe("API Gateway shutdown", () => {
       response.send("drained");
     });
 
-    const server = createApp({ apiRouter: router }).listen(0, "127.0.0.1");
+    const server = createApp({
+      apiRouter: router,
+      config: { ORIGIN: "http://localhost:5173", AUTH_SERVICE_URL: "http://auth-service:3000" },
+    }).listen(0, "127.0.0.1");
     await once(server, "listening");
     const address = server.address();
     if (!address || typeof address === "string") throw new Error("Test server did not bind a TCP port");
