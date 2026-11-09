@@ -3,6 +3,7 @@ export function installGracefulShutdown(server, {
   signals = process,
   onExit = (code) => process.exit(code),
   logger = console,
+  onShutdown = async () => {},
 } = {}) {
   let shuttingDown = false;
 
@@ -17,15 +18,24 @@ export function installGracefulShutdown(server, {
     }, timeoutMs);
     timeout.unref?.();
 
-    server.close((error) => {
-      clearTimeout(timeout);
+    server.close(async (error) => {
       if (error) {
+        clearTimeout(timeout);
         logger.error("deepagent-service failed to close its HTTP server", error);
         onExit(1);
         return;
       }
-      logger.info("deepagent-service HTTP server closed");
-      onExit(0);
+
+      try {
+        await onShutdown();
+        clearTimeout(timeout);
+        logger.info("deepagent-service HTTP server closed");
+        onExit(0);
+      } catch (shutdownError) {
+        clearTimeout(timeout);
+        logger.error("deepagent-service failed to release resources", shutdownError);
+        onExit(1);
+      }
     });
   };
 

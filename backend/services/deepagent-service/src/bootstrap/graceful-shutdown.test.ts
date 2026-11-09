@@ -70,4 +70,29 @@ describe("DeepAgent Service shutdown", () => {
       removeHandlers();
     }
   });
+
+  test("releases resources before exiting", async () => {
+    const signals = new EventEmitter();
+    let released = 0;
+    let resolveExit;
+    const exited = new Promise((resolve) => (resolveExit = resolve));
+    const removeHandlers = installGracefulShutdown({ close(callback) { callback(); } }, {
+      signals,
+      onExit: resolveExit,
+      logger,
+      timeoutMs: 500,
+      onShutdown: async () => {
+        released += 1;
+      },
+    });
+
+    signals.emit("SIGTERM");
+
+    try {
+      expect(await exited).toBe(0);
+      expect(released).toBe(1);
+    } finally {
+      removeHandlers();
+    }
+  });
 });

@@ -1,7 +1,8 @@
 import * as grpc from '@grpc/grpc-js'
-import { env } from '../config.js';
+import { getEnv } from '../config.js';
 
 export const startTaskServers = ()=>{
+    const env = getEnv();
     const server = new grpc.Server();
     
 

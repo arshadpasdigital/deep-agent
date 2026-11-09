@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package chat;
+
+service ChatService{
+    rpc (ChatRequest) returns (stream ChatChunk);
+}
+
+message ChatRequest{
+    string threadId=3;
+    string userId=1;
+    string messageId=2;
+    string agentId=4;
+}
+
+message ChatChunk{
+  string type = 1;
+  string content = 2;
+  string thinking = 3;
+  bool done = 4;
+  string error = 5;
+}
